@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SocialNetwork</string>
+    <string name="login">Login</string>
+    <string name="passord_hint">Enter your password</string>
+    <string name="login_hint">Enter email/username</string>
+    <string name="password_visible_content_description">Hide password</string>
+    <string name="password_hiden_content_description">Show password</string>
+    <string name="do_not_have_acc">Don\'t have an account yet?</string>
+    <string name="sign_up">Sign up!</string>
+</resources>
