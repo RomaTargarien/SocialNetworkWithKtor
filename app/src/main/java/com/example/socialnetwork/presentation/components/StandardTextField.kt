@@ -21,18 +21,18 @@ fun StandardTextField(
     isError: Boolean = false,
     maxLenght: Int = 40,
     keyboardType: KeyboardType = KeyboardType.Text,
+    showPasswordToggle: Boolean = false,
+    onPasswordToggleClick: (Boolean) -> Unit ={},
     onValueChanged: (String) -> Unit
 ) {
     val isPasswordToggleDisplayed by remember {
         mutableStateOf(keyboardType == KeyboardType.Password)
     }
-    var isPasswordVisible by remember {
-        mutableStateOf(false)
-    }
+
     TextField(
         value = value,
         onValueChange = {
-            if (it.length < maxLenght) {
+            if (it.length <= maxLenght) {
                 onValueChanged(it)
             } },
         placeholder = {
@@ -44,17 +44,17 @@ fun StandardTextField(
         singleLine = true,
         isError = isError,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
-        visualTransformation = if (isPasswordVisible  && isPasswordToggleDisplayed)
+        visualTransformation = if (showPasswordToggle  && isPasswordToggleDisplayed)
             PasswordVisualTransformation() else VisualTransformation.None,
         trailingIcon = {
             if (isPasswordToggleDisplayed) {
                 IconButton(onClick = {
-                    isPasswordVisible = !isPasswordVisible
+                    onPasswordToggleClick(!showPasswordToggle)
                 }) {
                     Icon(
-                        imageVector = if (isPasswordVisible)
+                        imageVector = if (showPasswordToggle)
                             Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                        contentDescription = if (isPasswordVisible) {
+                        contentDescription = if (showPasswordToggle) {
                             stringResource(id = R.string.password_visible_content_description)
                         } else {
                             stringResource(id = R.string.password_hiden_content_description)

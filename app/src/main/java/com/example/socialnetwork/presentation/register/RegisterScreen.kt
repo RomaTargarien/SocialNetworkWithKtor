@@ -1,16 +1,13 @@
-package com.example.socialnetwork.presentation.login
+package com.example.socialnetwork.presentation.register
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
@@ -22,19 +19,21 @@ import com.example.socialnetwork.presentation.components.StandardTextField
 import com.example.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.example.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.example.socialnetwork.presentation.ui.theme.SpaceSmall
+import com.example.socialnetwork.presentation.util.Screen
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     navController: NavController,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: RegisterViewModel = hiltViewModel()
 ) {
     Box(modifier = Modifier
         .fillMaxSize()
         .padding(
-        start = SpaceMedium,
-        end = SpaceMedium,
-        top = SpaceLarge,
-        bottom = 50.dp)
+            start = SpaceMedium,
+            end = SpaceMedium,
+            top = SpaceLarge,
+            bottom = 50.dp
+        )
     ) {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -53,7 +52,6 @@ fun LoginScreen(
                 onValueChanged = {
                     viewModel.setUserNameText(it)
                 },
-                isError = viewModel.isUserNameError.value,
                 hint = stringResource(id = R.string.login_hint),
                 keyboardType = KeyboardType.Email
             )
@@ -63,13 +61,8 @@ fun LoginScreen(
                 onValueChanged = {
                     viewModel.setPasswordText(it)
                 },
-                isError = viewModel.isPasswordError.value,
                 hint = stringResource(id = R.string.passord_hint),
-                keyboardType = KeyboardType.Password,
-                showPasswordToggle = viewModel.showPassword.value,
-                onPasswordToggleClick = {
-                    viewModel.setShowPassword(it)
-                }
+                keyboardType = KeyboardType.Password
             )
         }
         Text(
@@ -79,7 +72,8 @@ fun LoginScreen(
                 val signUpText = stringResource(id = R.string.sign_up)
                 withStyle(style = SpanStyle(
                     color = MaterialTheme.colors.primary
-                )) {
+                )
+                ) {
                     append(signUpText)
                 }
             },
@@ -87,5 +81,4 @@ fun LoginScreen(
             modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
-
 }
